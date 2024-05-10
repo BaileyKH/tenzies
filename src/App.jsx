@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Dice } from './Dice'
 import './App.css'
@@ -6,6 +6,19 @@ import './App.css'
 function App() {
 
   const [die, setDie] = useState(allNewDice())
+  const [tenzies, setTenzies] = useState(false)
+
+  useEffect(() => {
+      const allHeld = die.every((dice) => dice.isHeld) 
+      const firstValue = die[0].value
+      const allValue = die.every(dice => dice.value === firstValue)
+    
+      if (allHeld && allValue){
+        setTenzies(true)
+        console.log("Tenzies")
+      }
+
+  }, [die])
 
   // Helper function for new die after roll
   function generateNewDie(){
@@ -49,7 +62,7 @@ function App() {
           <Dice key={dice.id} value={dice.value} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)}
         />))}
       </div>
-      <button className="roll-dice" onClick={rollDice}>Roll</button>
+      <button className="roll-dice" onClick={rollDice}>{tenzies ? "Rest Game" : "Roll Dice"}</button>
     </main>
   )
 }
