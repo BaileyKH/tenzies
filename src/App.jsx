@@ -1,44 +1,24 @@
-import React from 'react'
+import { useState } from 'react'
 
 import { Dice } from './Dice'
 import './App.css'
 
 function App() {
 
+  const [die, setDie] = useState(allNewDice())
+
+  function allNewDice() {
+    let numberArr = []
+    for (let i = 0; i < 10; i++){
+      numberArr.push(Math.ceil(Math.random() * 6))
+    }
+    return numberArr
+  }
 
   return (
     <main>
       <div className="dice-container">
-        <Dice
-          value={1} 
-        />
-        <Dice
-          value={2} 
-        />
-        <Dice
-          value={3} 
-        />
-        <Dice
-          value={4} 
-        />
-        <Dice
-          value={5} 
-        />
-        <Dice
-          value={5} 
-        />
-        <Dice
-          value={4} 
-        />
-        <Dice
-          value={3} 
-        />
-        <Dice
-          value={2} 
-        />
-        <Dice
-          value={1} 
-        />
+        {die.map(dice => <Dice value={dice} />)}
       </div>
     </main>
   )
