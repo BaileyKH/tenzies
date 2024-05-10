@@ -4,6 +4,10 @@ body {
   font-family: "Karla", sans-serif;
 }
 
+.main-container{
+  position: relative;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -31,6 +35,23 @@ main {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
   gap: 20px;
+}
+
+.dice-rolls {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  top: 10px;
+  left: 10px;
+}
+
+.dice-rolls p {
+  font-weight: 600;
+}
+
+.dice-rolls p{
+  color: black;
 }
 
 .die-face {

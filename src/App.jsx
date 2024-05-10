@@ -8,7 +8,9 @@ function App() {
 
   const [die, setDie] = useState(allNewDice())
   const [tenzies, setTenzies] = useState(false)
+  const [count, setCount] = useState(0)
 
+  // When user wins
   useEffect(() => {
       const allHeld = die.every((dice) => dice.isHeld) 
       const firstValue = die[0].value
@@ -16,7 +18,6 @@ function App() {
     
       if (allHeld && allValue){
         setTenzies(true)
-        console.log("Tenzies")
       }
 
   }, [die])
@@ -41,9 +42,16 @@ function App() {
 
   // Resets dice
   function rollDice() {
-    setDie(oldDie => oldDie.map(die => {
-      return !die.isHeld ? generateNewDie() : die
-    }))
+    if (!tenzies) {
+      setDie(oldDie => oldDie.map(die => {
+        return !die.isHeld ? generateNewDie() : die
+      }))
+      setCount(prevCount => prevCount + 1)
+    } else {
+      setTenzies(false)
+      setDie(allNewDice)
+      setCount(0)
+    }
   }
 
   // Handling "Held" dice
@@ -55,17 +63,22 @@ function App() {
  
 
   return (
-    <main>
-      {tenzies && <Confetti />}
-      <h1 className="title">Tenzies</h1>
-      <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>
-      <div className="dice-container">
-        {die.map(dice => (
-          <Dice key={dice.id} value={dice.value} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)}
-        />))}
+    <div className="main-container">
+      <div className="dice-rolls">
+          <p>Rolls: {count}</p>
       </div>
-      <button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll Dice"}</button>
-    </main>
+      <main>
+        {tenzies && <Confetti />}
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>
+        <div className="dice-container">
+          {die.map(dice => (
+            <Dice key={dice.id} value={dice.value} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)}
+          />))}
+        </div>
+        <button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll Dice"}</button>
+      </main>
+    </div>
   )
 }
 
