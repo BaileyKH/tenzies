@@ -40,7 +40,8 @@ main {
 .dice-rolls {
   position: absolute;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   top: 10px;
   left: 10px;
@@ -48,6 +49,8 @@ main {
 
 .dice-rolls p {
   font-weight: 600;
+  margin: 5px;
+  letter-spacing: 1.5px;
 }
 
 .dice-rolls p{

@@ -60,7 +60,6 @@ function App() {
       return die.id === id ? {...die, isHeld: !die.isHeld} : die
     }))
   }
- 
 
   return (
     <div className="main-container">
