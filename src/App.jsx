@@ -63,20 +63,22 @@ function App() {
 
   return (
     <div className="main-container">
-      <div className="dice-rolls">
-          <p>Rolls: {count}</p>
-      </div>
-      <main>
-        {tenzies && <Confetti />}
-        <h1 className="title">Tenzies</h1>
-        <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>
-        <div className="dice-container">
-          {die.map(dice => (
-            <Dice key={dice.id} value={dice.value} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)}
-          />))}
+      <div className="main-outter">
+        <div className="dice-rolls">
+            <p>Rolls: {count}</p>
         </div>
-        <button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll Dice"}</button>
-      </main>
+        <main>
+          {tenzies && <Confetti />}
+          <h1 className="title">Tenzies</h1>
+          <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>
+          <div className="dice-container">
+            {die.map(dice => (
+              <Dice key={dice.id} value={dice.value} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)}
+            />))}
+          </div>
+          <button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll Dice"}</button>
+        </main>
+      </div>
     </div>
   )
 }
