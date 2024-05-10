@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Confetti from 'react-confetti'
 
 import { Dice } from './Dice'
 import './App.css'
@@ -55,6 +56,7 @@ function App() {
 
   return (
     <main>
+      {tenzies && <Confetti />}
       <h1 className="title">Tenzies</h1>
       <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls</p>
       <div className="dice-container">
@@ -62,7 +64,7 @@ function App() {
           <Dice key={dice.id} value={dice.value} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)}
         />))}
       </div>
-      <button className="roll-dice" onClick={rollDice}>{tenzies ? "Rest Game" : "Roll Dice"}</button>
+      <button className="roll-dice" onClick={rollDice}>{tenzies ? "New Game" : "Roll Dice"}</button>
     </main>
   )
 }
